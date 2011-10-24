@@ -37,7 +37,14 @@ private JSONArray jArray = null;
 private String result = null;
 private HttpResponse response=null;
 
-
+/*******
+ * 
+ * @param nameValuePairs
+ * @param page 
+ * 		accountcheck
+ * 		...search	
+ * @return
+ */
 public ArrayList<HashMap<String, String>> DataSearch (ArrayList<NameValuePair> nameValuePairs,String page) {
 	ArrayList<HashMap<String, String>> data=new ArrayList<HashMap<String, String>>(); 
 	HashMap<String, String> pairs = new HashMap<String, String>();
