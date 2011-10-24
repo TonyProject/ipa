@@ -41,8 +41,11 @@ private HttpResponse response=null;
  * 
  * @param nameValuePairs
  * @param page 
- * 		accountcheck
- * 		...search	
+ * 		accountcheck :  AccID , AccPass
+ * 		ipa_search	 :	AccID
+ * 		mycoupon_search	: AccID
+ * 		myhonor_search	: IpaID
+ * 		closet_search	: IpaID , type
  * @return
  */
 public ArrayList<HashMap<String, String>> DataSearch (ArrayList<NameValuePair> nameValuePairs,String page) {
