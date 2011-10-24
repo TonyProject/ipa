@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<TextView  
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:text="@string/hello"
+    android:id="@+id/status"/>
+<TextView android:id="@+id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ACCOUNT"></TextView>
+<EditText android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/account"></EditText>
+<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/passw" android:text="PASSWORD"></TextView>
+<EditText android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/pass" android:password="true"></EditText>
+<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="SEND" android:id="@+id/send"></Button>
+<TextView android:id="@+id/status2" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+</LinearLayout>
