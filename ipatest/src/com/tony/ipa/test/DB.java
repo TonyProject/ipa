@@ -7,10 +7,13 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpRequestFactory;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -33,10 +36,59 @@ import android.widget.Toast;
 
 public class DB {
 	
-private JSONArray jArray = null;
 private String result = null;
 private HttpResponse response=null;
 
+private static final String PLACES_SEARCH_URL =  "https://maps.googleapis.com/maps/api/place/search/json?";
+private static final String API_KEY = "AIzaSyCm-5HSgkhLKgWjXV6OgbhpyqJaRxN--JA";
+ 
+ 
+ public ArrayList<JSONObject> LocSearch(double latitude,double longitude) throws Exception {
+	 //ArrayList<HashMap<String, String>> data=new ArrayList<HashMap<String, String>>(); 
+	 ArrayList<JSONObject> data=new ArrayList<JSONObject>();
+	 //HashMap<String, String> pairs = new HashMap<String, String>();
+	 try{
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpGet httpget = new HttpGet(PLACES_SEARCH_URL+"location="+latitude+","+longitude+
+										"&radius=500&types=food&sensor=false&key="+API_KEY);
+		response = httpclient.execute(httpget);		
+		}catch(Exception e){
+				Log.e("log_tag", "Error in http connection "+e.toString());
+				}
+	 //convert response to string
+	try{
+		result = EntityUtils.toString(response.getEntity());
+		Log.v("url request", "string:"+result);	
+			}catch(Exception e){
+			      Log.e("log_tag", "Error converting result "+e.toString());
+			}
+	//parse json data
+	try{
+		JSONObject json_data = new JSONObject(result);
+		String status=json_data.getString("status");
+		if("OK".equals(status)){
+			Log.e("log_tag", "ok");
+			JSONArray jArray = json_data.getJSONArray("results");
+			Log.e("log_tag","length "+jArray.length());
+			for (int i = 0; i < jArray.length(); i++) {
+					JSONObject j = jArray.optJSONObject(i);
+					Log.e("log_tag",j.getString("name"));
+					data.add(j);
+					}
+		}
+		else if("ZERO_RESULTS".equals(status)){
+			Log.e("log_tag", "ZERO_RESULTS");
+		}
+		else{
+			Log.e("log_tag", status);
+		}
+			}catch(JSONException e){
+				Log.e("log_tag", "Error parsing data "+e.toString());
+			}
+
+	 return data;
+ }
+ 
 /*******
  * 
  * @param nameValuePairs
@@ -48,9 +100,10 @@ private HttpResponse response=null;
  * 		closet_search	: IpaID , type
  * @return
  */
-public ArrayList<HashMap<String, String>> DataSearch (ArrayList<NameValuePair> nameValuePairs,String page) {
-	ArrayList<HashMap<String, String>> data=new ArrayList<HashMap<String, String>>(); 
-	HashMap<String, String> pairs = new HashMap<String, String>();
+
+public ArrayList<JSONObject> DataSearch (ArrayList<NameValuePair> nameValuePairs,String page) {
+	ArrayList<JSONObject> data=new ArrayList<JSONObject>(); 
+	//HashMap<String, String> pairs = new HashMap<String, String>();
 	//http post
 	try{
 	    HttpClient httpclient = new DefaultHttpClient();
@@ -70,7 +123,7 @@ public ArrayList<HashMap<String, String>> DataSearch (ArrayList<NameValuePair> n
 		
 	if (result.equals("null")||result.equals("")){
 		Log.v("url request", "not found");
-		jArray = null;
+		//jArray = null;
 	}
 	else{
 		Log.v("url request", "string:"+result);		
@@ -84,20 +137,18 @@ public ArrayList<HashMap<String, String>> DataSearch (ArrayList<NameValuePair> n
 			              //);
 			              //test.setText("id: "+json_data.getInt("MovieID"));
 			      }*/
-				
-
-	
 
 				Log.e("log_tag","length "+jArray.length());
 				for (int i = 0; i < jArray.length(); i++) {
 					JSONObject j = jArray.optJSONObject(i);
-					Iterator it = j.keys();
+					data.add(j);
+					/*Iterator it = j.keys();
 					while (it.hasNext()) {
 						String n = (String) it.next();
 						pairs.put(n,j.getString(n));
 						Log.e("log_tag", "put in pairs "+n);
 					}
-					data.add(pairs);
+					data.add(pairs);*/
 				}
 		}catch(JSONException e){
 			Log.e("log_tag", "Error parsing data "+e.toString());

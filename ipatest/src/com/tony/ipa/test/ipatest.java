@@ -57,9 +57,12 @@ public void onCreate(Bundle savedInstanceState) {
 			
 			DB db = new DB();
 			try{
-				ArrayList<HashMap<String, String>> result = db.DataSearch(nameValuePairs, "ipa_search");
+				double a =25.019943, b=121.542353;
+				ArrayList<JSONObject> result = db.LocSearch(a,b);
+				//ArrayList<JSONObject> result = db.DataSearch(nameValuePairs,"mycoupon_search");
+				Log.e("log_tag","size="+result.size());
 				for(int i=0;i<result.size();i++){
-					status.append(result.get(i).toString()+" ");
+					status.append(result.get(i).toString());
 				}
 				
 			}catch(Exception e){
