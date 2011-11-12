@@ -54,7 +54,7 @@ private static final String API_KEY = "AIzaSyCm-5HSgkhLKgWjXV6OgbhpyqJaRxN--JA";
 	 try{
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpGet httpget = new HttpGet(PLACES_SEARCH_URL+"location="+latitude+","+longitude+
-										"&radius=500&types=food&sensor=false&key="+API_KEY);
+				"&radius=500&types=food&sensor=false&key="+API_KEY);
 		response = httpclient.execute(httpget);		
 		}catch(Exception e){
 				Log.e("log_tag", "Error in http connection "+e.toString());
@@ -62,7 +62,7 @@ private static final String API_KEY = "AIzaSyCm-5HSgkhLKgWjXV6OgbhpyqJaRxN--JA";
 	 //convert response to string
 	try{
 		result = EntityUtils.toString(response.getEntity());
-		Log.v("url request", "string:"+result);	
+		Log.e("url request", "string:"+result);	
 			}catch(Exception e){
 			      Log.e("log_tag", "Error converting result "+e.toString());
 			}
@@ -125,40 +125,26 @@ public ArrayList<JSONObject> DataSearch (ArrayList<NameValuePair> nameValuePairs
 		      Log.e("log_tag", "Error converting result "+e.toString());
 		}
 		
-	if (result.equals("null")||result.equals("")){
-		Log.v("url request", "not found");
-		//jArray = null;
-	}
-	else{
-		Log.v("url request", "string:"+result);		
-			//parse json data
-		try{
-				JSONArray jArray = new JSONArray(result);
-			    /*JSONObject json_data = jArray.getJSONObject(0);
-			    for(int i=0;i<jArray.length();i++){
-			              JSONObject json_data2 = jArray.getJSONObject(i);
-			              //Log.i("log_tag","id: "+json_data2.getString("accountID")
-			              //);
-			              //test.setText("id: "+json_data.getInt("MovieID"));
-			      }*/
-
-				Log.e("log_tag","length "+jArray.length());
-				for (int i = 0; i < jArray.length(); i++) {
-					JSONObject j = jArray.optJSONObject(i);
-					data.add(j);
-					/*Iterator it = j.keys();
-					while (it.hasNext()) {
-						String n = (String) it.next();
-						pairs.put(n,j.getString(n));
-						Log.e("log_tag", "put in pairs "+n);
-					}
-					data.add(pairs);*/
-				}
-		}catch(JSONException e){
-			Log.e("log_tag", "Error parsing data "+e.toString());
+			
+	//parse json data
+	try{
+		Log.e("url request", "string:"+result.toString());
+		if (result.equals("null")||"".equals(result)){
+			Log.e("url request", "not found");
+			//jArray = null;
 		}
-	
-	}//end else
+		else{
+			JSONArray jArray = new JSONArray(result);
+			Log.e("log_tag","length "+jArray.length());
+			for (int i = 0; i < jArray.length(); i++) {
+				JSONObject j = jArray.optJSONObject(i);
+				data.add(j);
+			}
+		}
+	}catch(JSONException e){
+		Log.e("log_tag", "Error parsing data "+e.toString());
+	}
+
 	return data;
 	}//end function
 

@@ -47,13 +47,17 @@ public void onCreate(Bundle savedInstanceState) {
 			double a =25.019943, b=121.542353;
 			ArrayList<JSONObject> result = db.LocSearch(a,b);
 			Log.e("log_loc","size="+result.size());
-			for(int i=0;i<result.size();i++)
+			for(int i=0;i<result.size();i++){
 				Log.e("r_loc",result.get(i).getString("name"));
-		
+				Log.e("r_loc","lat "+
+					result.get(i).getJSONObject("geometry").getJSONObject("location").getDouble("lat"));
+				Log.e("r_loc","lng "+
+						result.get(i).getJSONObject("geometry").getJSONObject("location").getDouble("lng"));
+			}
 	
 	//§äÀu´f¸ê°T(activity)
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-			nameValuePairs.add(new BasicNameValuePair("ShopID","100000"));
+			nameValuePairs.add(new BasicNameValuePair("ShopID","100001"));
 
 			ArrayList<JSONObject> result_a = db.DataSearch(nameValuePairs,"activity_search");
 			Log.e("log_act","size="+result_a.size());
@@ -65,19 +69,7 @@ public void onCreate(Bundle savedInstanceState) {
 		Log.e("log_tag", "Error get data "+e.toString());				
 		}	
 		//parse json data
-	/*try{
-			      JSONObject json_data = json_result.getJSONObject(0);
-			      //test = (TextView) findViewById(R.id.textView1);
-			      for(int i=0;i<json_result.length();i++){
-			              JSONObject json_data2 = json_result.getJSONObject(i);
-			              Log.i("log_tag","id: "+json_data2.getString("accountID")
-			              );
-			              //test.setText("id: "+json_data.getInt("MovieID"));
-			      }
-			}catch(JSONException e){
-			      Log.e("log_tag", "Error parsing data "+e.toString());
-				}
-			*/
+
 		
 		
 
