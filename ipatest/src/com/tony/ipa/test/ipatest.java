@@ -39,38 +39,33 @@ public void onCreate(Bundle savedInstanceState) {
 	
 	super.onCreate(savedInstanceState);
 	setContentView(R.layout.main);
-//取得輸入資料
-	acc=(EditText)findViewById(R.id.account);
-	pass=(EditText)findViewById(R.id.pass);
-	send=(Button)findViewById(R.id.send);
-	status=(TextView)findViewById(R.id.status2);
 
-	send.setOnClickListener(new OnClickListener() {
-		public void onClick(View v){
-			String account=acc.getText().toString(),
-			password=pass.getText().toString();
-
+	
+	DB db = new DB();
+	//找附近店家資訊
+	try{
+			double a =25.019943, b=121.542353;
+			ArrayList<JSONObject> result = db.LocSearch(a,b);
+			Log.e("log_loc","size="+result.size());
+			for(int i=0;i<result.size();i++)
+				Log.e("r_loc",result.get(i).getString("name"));
+		
+	
+	//找優惠資訊(activity)
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+			nameValuePairs.add(new BasicNameValuePair("ShopID","100000"));
 
-			nameValuePairs.add(new BasicNameValuePair("AccID",account));
-			//nameValuePairs.add(new BasicNameValuePair("AccPass",password));
-			
-			DB db = new DB();
-			try{
-				double a =25.019943, b=121.542353;
-				ArrayList<JSONObject> result = db.LocSearch(a,b);
-				//ArrayList<JSONObject> result = db.DataSearch(nameValuePairs,"mycoupon_search");
-				Log.e("log_tag","size="+result.size());
-				for(int i=0;i<result.size();i++){
-					status.append(result.get(i).toString());
-				}
-				
-			}catch(Exception e){
-				Log.e("log_tag", "Error get data "+e.toString());				
+			ArrayList<JSONObject> result_a = db.DataSearch(nameValuePairs,"activity_search");
+			Log.e("log_act","size="+result_a.size());
+			for(int i=0;i<result_a.size();i++){
+				Log.e("r_act",result_a.get(i).getString("activityName"));
 			}
-			
-			//parse json data
-			/*try{
+			}
+		catch(Exception e){
+		Log.e("log_tag", "Error get data "+e.toString());				
+		}	
+		//parse json data
+	/*try{
 			      JSONObject json_data = json_result.getJSONObject(0);
 			      //test = (TextView) findViewById(R.id.textView1);
 			      for(int i=0;i<json_result.length();i++){
@@ -81,11 +76,10 @@ public void onCreate(Bundle savedInstanceState) {
 			      }
 			}catch(JSONException e){
 			      Log.e("log_tag", "Error parsing data "+e.toString());
-				}*/
-			
-
-		}
-	}); //end onclicklistener
+				}
+			*/
+		
+		
 
 } //end oncreate
 } //end class

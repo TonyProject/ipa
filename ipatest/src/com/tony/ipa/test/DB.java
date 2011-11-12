@@ -41,8 +41,12 @@ private HttpResponse response=null;
 
 private static final String PLACES_SEARCH_URL =  "https://maps.googleapis.com/maps/api/place/search/json?";
 private static final String API_KEY = "AIzaSyCm-5HSgkhLKgWjXV6OgbhpyqJaRxN--JA";
- 
- 
+
+/*******
+ * 
+ * @param 經緯度
+ * @return 附近地區
+ */
  public ArrayList<JSONObject> LocSearch(double latitude,double longitude) throws Exception {
 	 //ArrayList<HashMap<String, String>> data=new ArrayList<HashMap<String, String>>(); 
 	 ArrayList<JSONObject> data=new ArrayList<JSONObject>();
@@ -67,12 +71,12 @@ private static final String API_KEY = "AIzaSyCm-5HSgkhLKgWjXV6OgbhpyqJaRxN--JA";
 		JSONObject json_data = new JSONObject(result);
 		String status=json_data.getString("status");
 		if("OK".equals(status)){
-			Log.e("log_tag", "ok");
+			//Log.e("log_tag", "ok");
 			JSONArray jArray = json_data.getJSONArray("results");
-			Log.e("log_tag","length "+jArray.length());
+			//Log.e("log_tag","length "+jArray.length());
 			for (int i = 0; i < jArray.length(); i++) {
 					JSONObject j = jArray.optJSONObject(i);
-					Log.e("log_tag",j.getString("name"));
+					//Log.e("log_tag",j.getString("name"));
 					data.add(j);
 					}
 		}
@@ -98,7 +102,7 @@ private static final String API_KEY = "AIzaSyCm-5HSgkhLKgWjXV6OgbhpyqJaRxN--JA";
  * 		mycoupon_search	: AccID
  * 		myhonor_search	: IpaID
  * 		closet_search	: IpaID , type
- * @return
+ * @return ArrayList<JSONObject>
  */
 
 public ArrayList<JSONObject> DataSearch (ArrayList<NameValuePair> nameValuePairs,String page) {
