@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+<ImageView 
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:id="@+id/ipachan"
+	android:layout_gravity="center"
+	/>
+<RelativeLayout 
+	android:id="@+id/relativeLayout1" 
+	android:layout_width="match_parent" 
+	android:layout_height="wrap_content">
+    <Button 
+    	android:layout_height="wrap_content" 
+    	android:layout_width="wrap_content" 
+    	android:layout_alignParentTop="true" 
+    	android:layout_alignParentLeft="true" 
+    	android:id="@+id/closet" 
+    	android:text="衣櫃"
+    	/>
+    <Button 
+    	android:layout_height="wrap_content" 
+    	android:layout_width="wrap_content" 
+    	android:layout_alignParentTop="true" 
+    	android:layout_centerHorizontal="true" 
+    	android:id="@+id/six" android:text="能力圖"
+    	/>
+    <Button 
+    	android:layout_height="wrap_content" 
+    	android:layout_width="wrap_content" 
+    	android:layout_alignParentTop="true" 
+    	android:layout_alignParentRight="true" 
+    	android:text="榮耀" android:id="@+id/honor"
+    	/>
+</RelativeLayout>
+    
+</LinearLayout>
