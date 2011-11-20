@@ -21,7 +21,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 public class IPAChan extends Activity { 
-    private static final String IMG_URL= "http://4.bp.blogspot.com/_9joATD9m9xM/SAhKG9aeu6I/AAAAAAAAADQ/5h2tP-nco1o/s320/cute-emo-13.jpg";
+    private static final String IMG_URL= "http://androidheadlines.com/wp-content/uploads/2011/07/contest-androidspin-wants-to-help-you-win-a-asus-transformer_tt-fr_0.png";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
