@@ -1,4 +1,4 @@
-package edu.tony.ipa;
+package com.tony.test;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -54,7 +54,7 @@ private static final String API_KEY = "AIzaSyCm-5HSgkhLKgWjXV6OgbhpyqJaRxN--JA";
 	 try{
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpGet httpget = new HttpGet(PLACES_SEARCH_URL+"location="+latitude+","+longitude+
-				"&radius=500&types=food&sensor=false&key="+API_KEY);
+				"&radius=500&sensor=false&key="+API_KEY);
 		response = httpclient.execute(httpget);		
 		}catch(Exception e){
 				Log.e("log_tag", "Error in http connection "+e.toString());
@@ -102,6 +102,9 @@ private static final String API_KEY = "AIzaSyCm-5HSgkhLKgWjXV6OgbhpyqJaRxN--JA";
  * 		mycoupon_search	: AccID
  * 		myhonor_search	: IpaID
  * 		closet_search	: IpaID , type
+ *      shop_search		: ShopID		查詢某家店的資訊
+ *      activity_search	: ShopID		 查詢某家店的活動
+ *      shop_loc_search : Lat,Lng        給經緯度看這家店有沒有再db裡面
  * @return ArrayList<JSONObject>
  */
 
@@ -128,14 +131,16 @@ public ArrayList<JSONObject> DataSearch (ArrayList<NameValuePair> nameValuePairs
 			
 	//parse json data
 	try{
-		Log.e("url request", "string:"+result.toString());
-		if (result.equals("null")||"".equals(result)){
-			Log.e("url request", "not found");
-			//jArray = null;
-		}
+		//Log.e("url request", "string:"+result.toString());
+		JSONArray jArray = new JSONArray(result);
+		JSONObject jOb = jArray.optJSONObject(0);
+		//Log.e("log_tag","length "+jArray.length());
+		//Log.e("log_tag",jArray.optJSONObject(0).toString());
+		if("false".equals(jOb.get("output")))
+			Log.e("log_tag","false");
 		else{
-			JSONArray jArray = new JSONArray(result);
-			Log.e("log_tag","length "+jArray.length());
+			jArray = jOb.getJSONArray("result");
+			//Log.e("log_tag",jArray.toString());
 			for (int i = 0; i < jArray.length(); i++) {
 				JSONObject j = jArray.optJSONObject(i);
 				data.add(j);

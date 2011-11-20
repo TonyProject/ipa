@@ -45,19 +45,35 @@ public void onCreate(Bundle savedInstanceState) {
 	//找附近店家資訊
 	try{
 			double a =25.019943, b=121.542353;
+			//放google place的資料
 			ArrayList<JSONObject> result = db.LocSearch(a,b);
+			//要和db對照的資料
+			ArrayList<NameValuePair> location = new ArrayList<NameValuePair>();
+			ArrayList<JSONObject> shop_loc = new ArrayList<JSONObject>();
 			Log.e("log_loc","size="+result.size());
+			String name;
+			Double lat,lng;
 			for(int i=0;i<result.size();i++){
-				Log.e("r_loc",result.get(i).getString("name"));
-				Log.e("r_loc","lat "+
-					result.get(i).getJSONObject("geometry").getJSONObject("location").getDouble("lat"));
-				Log.e("r_loc","lng "+
-						result.get(i).getJSONObject("geometry").getJSONObject("location").getDouble("lng"));
+				name = result.get(i).getString("name");
+				lat = result.get(i).getJSONObject("geometry").getJSONObject("location").getDouble("lat");
+				lng = result.get(i).getJSONObject("geometry").getJSONObject("location").getDouble("lng");
+				Log.e("r_loc",name);
+				Log.e("r_loc","lat "+ lat);
+				Log.e("r_loc","lng "+ lng);
+				
+				//查詢地點是否是和我們合作的商家
+				//location.add(new BasicNameValuePair("Lat",lat.toString()));
+				location.add(new BasicNameValuePair("Lng",lng.toString()));
+				location.add(new BasicNameValuePair("Lat",lat.toString()));
+				shop_loc = db.DataSearch(location,"shop_loc_search");
+				for(int j=0;j<shop_loc.size();j++){
+					Log.e("shop_id",shop_loc.get(j).getString("shopID"));
+				}
 			}
 	
 	//找優惠資訊(activity)
 			ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-			nameValuePairs.add(new BasicNameValuePair("ShopID","100001"));
+			nameValuePairs.add(new BasicNameValuePair("ShopID","1000"));
 
 			ArrayList<JSONObject> result_a = db.DataSearch(nameValuePairs,"activity_search");
 			Log.e("log_act","size="+result_a.size());
