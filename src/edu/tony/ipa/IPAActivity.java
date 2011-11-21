@@ -13,9 +13,9 @@ public class IPAActivity extends GDActivity {
         super.onCreate(savedInstanceState);
         setActionBarContentView(R.layout.main);
         
-        /*//For testing
+        //For testing
         Intent i = new Intent();
 		i.setClass(IPAActivity.this, IPAChan.class);
-		startActivity(i);*/
+		startActivity(i);
     }
 }

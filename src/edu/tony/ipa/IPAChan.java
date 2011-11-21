@@ -1,5 +1,7 @@
 package edu.tony.ipa;
 
+import greendroid.app.GDActivity;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,7 +14,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -20,13 +21,13 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 
-public class IPAChan extends Activity { 
+public class IPAChan extends GDActivity { 
     private static final String IMG_URL= "http://androidheadlines.com/wp-content/uploads/2011/07/contest-androidspin-wants-to-help-you-win-a-asus-transformer_tt-fr_0.png";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ipa_chan);
+        setActionBarContentView(R.layout.ipa_chan);
     	DB db = new DB();
     	ArrayList<NameValuePair> ipa = new ArrayList<NameValuePair>();
     	ipa.add(new BasicNameValuePair("AccID","irene3119"));
