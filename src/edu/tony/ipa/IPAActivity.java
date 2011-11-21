@@ -18,13 +18,13 @@ public class IPAActivity extends GDActivity {
         
         ipaChan.setOnClickListener(new Button.OnClickListener()
         {
-          @Override
-          public void onClick(View v)
-          { 
-        	  	Intent i = new Intent();
+        	@Override
+        	public void onClick(View v)
+        	{ 
+        		Intent i = new Intent();
       			i.setClass(IPAActivity.this, IPAChan.class);
       			startActivity(i);
-          }
+        	}
         }); 
     }
     

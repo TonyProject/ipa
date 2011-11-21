@@ -788,10 +788,11 @@ containing a value of this type.
         public static final int gd_text_item_view=0x7f03001c;
         public static final int gd_thumbnail_item_view=0x7f03001d;
         public static final int home=0x7f03001e;
-        public static final int ipa_chan=0x7f03001f;
-        public static final int ipa_closet=0x7f030020;
-        public static final int ipa_honor=0x7f030021;
-        public static final int main=0x7f030022;
+        public static final int ipa_attr=0x7f03001f;
+        public static final int ipa_chan=0x7f030020;
+        public static final int ipa_closet=0x7f030021;
+        public static final int ipa_honor=0x7f030022;
+        public static final int main=0x7f030023;
     }
     public static final class string {
         public static final int app_name=0x7f08001d;
