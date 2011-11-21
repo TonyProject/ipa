@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent" android:weightSum="1">
+ 
+<LinearLayout
+      android:orientation="vertical" 
+      android:id="@+id/linearLayout2" 
+      android:layout_width="match_parent" android:layout_height="336dp" android:layout_weight="1.24"
+      android:background="#8A8A8A">
+ 	  <ImageView 
+   		 android:id="@+id/image1"
+  		 android:src="@drawable/ipa2"
+  		 android:layout_width="match_parent" android:layout_height="match_parent"/>
+ 	
+</LinearLayout>
+
+<LinearLayout
+      android:orientation="horizontal" 
+      android:layout_height="wrap_content" 
+      android:id="@+id/linearLayout3" 
+      android:layout_width="match_parent"
+      android:background="#8A8A8A">
+    <ImageButton android:src="@drawable/myself3" 
+      android:layout_width="160dp" 
+      android:id="@+id/imageButton1"  
+      android:layout_height="wrap_content" 
+      android:onClick="myselfOnClick"></ImageButton>
+      
+      <ImageButton 
+      	android:src="@drawable/look2" 
+      	android:layout_width="wrap_content" 
+      	android:id="@+id/imageButton2" 
+      	android:layout_weight="1" 
+      	android:layout_height="match_parent"
+      	android:onClick="lookOnClick"></ImageButton>
+      
+</LinearLayout>
+
+<LinearLayout
+      android:orientation="horizontal" 
+      android:layout_height="wrap_content" 
+      android:id="@+id/linearLayout3" 
+      android:layout_width="match_parent"
+      android:background="#8A8A8A">
+      
+      <ImageButton 
+      	android:layout_height="wrap_content" 
+      	android:src="@drawable/hotnews"  
+      	android:layout_weight="1" 
+      	android:layout_width="wrap_content" 
+      	android:id="@+id/imageButton3"
+      	android:onClick="hotnewsOnClick"></ImageButton>
+      
+      <ImageButton 
+      	android:layout_height="wrap_content" 
+      	android:src="@drawable/coupon" 
+      	android:layout_weight="1" 
+      	android:layout_width="wrap_content" 
+      	android:id="@+id/imageButton4"
+      	android:onClick="couponOnClick"></ImageButton>
+      
+</LinearLayout>
+
+</LinearLayout>

@@ -2,4 +2,5 @@
 <resources>
     <string name="hello">Hello World, IPAActivity!</string>
     <string name="app_name">IPA</string>
+    <string name="app_url">http://www.google.com</string>
 </resources>
