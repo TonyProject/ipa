@@ -1,9 +1,11 @@
 package edu.tony.ipa;
 
 import greendroid.app.GDActivity;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 public class IPAActivity extends GDActivity {
     /** Called when the activity is first created. */
@@ -11,11 +13,19 @@ public class IPAActivity extends GDActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setActionBarContentView(R.layout.main);
+        setActionBarContentView(R.layout.home);
+        ImageButton ipaChan = (ImageButton) findViewById(R.id.imageButton1);
         
-        //For testing
-        Intent i = new Intent();
-		i.setClass(IPAActivity.this, IPAChan.class);
-		startActivity(i);
+        ipaChan.setOnClickListener(new Button.OnClickListener()
+        {
+          @Override
+          public void onClick(View v)
+          { 
+        	  	Intent i = new Intent();
+      			i.setClass(IPAActivity.this, IPAChan.class);
+      			startActivity(i);
+          }
+        }); 
     }
+    
 }
