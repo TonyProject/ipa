@@ -8,11 +8,45 @@
 	android:layout_height="wrap_content"
 	android:id="@+id/ipachan"
 	android:layout_gravity="center"
-	android:background="@drawable/bg1" android:layout_width="349dp" android:layout_weight="0.97"/>
-<RelativeLayout android:id="@+id/relativeLayout1" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_gravity="bottom" android:background="#ffffff" android:layout_marginBottom="5dp">
-    <Button android:background="@drawable/six" android:id="@+id/six" android:layout_alignParentTop="true" android:layout_centerHorizontal="true" android:clickable="true" android:layout_height="60dp" android:layout_width="60dp"></Button>
-    <Button android:layout_alignParentLeft="true" android:layout_marginLeft="25dp" android:background="@drawable/closet" android:id="@+id/closet" android:layout_alignParentTop="true" android:layout_width="60dp" android:layout_height="60dp"></Button>
-    <Button android:background="@drawable/honor" android:id="@+id/honor" android:layout_alignParentTop="true" android:layout_marginRight="25dp" android:layout_alignParentRight="true" android:layout_height="60dp" android:layout_width="60dp"></Button>
+	android:background="@drawable/bg1" 
+	android:layout_weight="0.97" 
+	android:layout_width="fill_parent"
+	/>
+	
+<RelativeLayout 
+	android:id="@+id/relativeLayout1" 
+	android:layout_height="wrap_content" 
+	android:layout_width="match_parent" 
+	android:layout_gravity="bottom" 
+	android:background="#ffffff" 
+	android:layout_marginBottom="5dp">
+    <Button 
+    	android:background="@drawable/six" 
+    	android:id="@+id/attr" 
+    	android:layout_alignParentTop="true" 
+    	android:layout_centerHorizontal="true" 
+    	android:clickable="true" 
+    	android:layout_height="60dp" 
+    	android:layout_width="60dp"
+    	/>
+    <Button 
+    	android:layout_alignParentLeft="true" 
+    	android:layout_marginLeft="25dp" 
+    	android:background="@drawable/closet" 
+    	android:id="@+id/closet" 
+    	android:layout_alignParentTop="true" 
+    	android:layout_width="60dp" 
+    	android:layout_height="60dp"
+    	/>
+    <Button 
+    	android:background="@drawable/honor" 
+    	android:id="@+id/honor" 
+    	android:layout_alignParentTop="true" 
+    	android:layout_marginRight="25dp" 
+    	android:layout_alignParentRight="true" 
+    	android:layout_height="60dp" 
+    	android:layout_width="60dp"
+    	/>
 </RelativeLayout>
 
     

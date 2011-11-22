@@ -3,4 +3,10 @@
     <string name="hello">Hello World, IPAActivity!</string>
     <string name="app_name">IPA</string>
     <string name="app_url">http://www.google.com</string>
+    <string name="fun">娛樂</string>
+    <string name="art">文藝</string>
+    <string name="fashion">潮流</string>
+    <string name="fat">肥胖</string>
+    <string name="out">行動</string>
+    <string name="sunny">陽光</string>
 </resources>
