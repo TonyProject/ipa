@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+  
+  <TextView 
+  android:text="REGISTER"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:textSize="40px"
+  android:layout_marginLeft="140px"/>
+  
+  <LinearLayout 
+  android:orientation="horizontal"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+  
+  <TextView 
+  android:text=" *Username : "
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:layout_marginTop="10px"/>
+  
+  <EditText 
+  android:id="@+id/text2"
+  android:layout_width="340px"
+  android:layout_height="wrap_content"
+  android:hint="at least 4 character"
+  android:layout_marginTop="10px"/>
+  
+  </LinearLayout>
+  
+  <LinearLayout 
+  android:orientation="horizontal"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+  
+  <TextView 
+  android:text=" *Password : "
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:layout_marginTop="10px"/>
+  
+  <EditText 
+  android:id="@+id/text3"
+  android:layout_width="346px"
+  android:layout_height="wrap_content"
+  android:hint="at least 6 character"
+  android:layout_marginTop="10px"/>
+  
+  </LinearLayout>
+  
+  <LinearLayout 
+  android:orientation="horizontal"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+  
+  <TextView 
+  android:text=" *First name : "
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:layout_marginTop="10px"/>
+  
+  <EditText 
+  android:id="@+id/text4"
+  android:layout_width="337px"
+  android:layout_height="wrap_content"
+  android:layout_marginTop="10px"/>
+  
+  </LinearLayout>
+  
+  <LinearLayout 
+  android:orientation="horizontal"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+  
+  <TextView 
+  android:text=" *Last name : "
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"/>
+  
+  <EditText 
+  android:id="@+id/text5"
+  android:layout_width="340px"
+  android:layout_height="wrap_content"
+  android:layout_marginTop="10px"/>
+  
+  </LinearLayout>
+  
+  <LinearLayout 
+  android:orientation="horizontal"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+  
+  <TextView 
+  android:text=" *Email : "
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:layout_marginTop="10px"/>
+  
+  <EditText 
+  android:id="@+id/text6"
+  android:layout_width="383px"
+  android:layout_height="wrap_content"
+  android:layout_marginTop="10px"/>
+  
+  </LinearLayout>
+  
+  <LinearLayout 
+  android:orientation="horizontal"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+  
+  <TextView 
+  android:text=" *Phone : "
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:layout_marginTop="10px"/>
+  
+  <EditText 
+  android:id="@+id/text7"
+  android:layout_width="375px"
+  android:layout_height="wrap_content"
+  android:layout_marginTop="10px"/>
+  
+  </LinearLayout>
+  
+  <LinearLayout 
+  android:orientation="horizontal"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+  
+  <Button 
+  android:id="@+id/button3"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:layout_marginTop="10px"
+  android:text="Done"
+  android:onClick="doneOnClick"/>
+  
+  <TextView 
+  android:id="@+id/errortext"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:textColor="#F50505"/>
+  
+  </LinearLayout>
+    
+</LinearLayout>

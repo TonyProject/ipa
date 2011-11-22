@@ -3,10 +3,102 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#8A8A8A"
     >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/hello"
+    
+    <LinearLayout android:id="@+id/linearLayout6" 
+    	android:layout_height="336dp" 
+    	android:layout_width="fill_parent" 
+    	android:orientation="vertical">
+        
+        <TextView android:layout_width="wrap_content" 
+        	android:layout_marginLeft="170px" 
+        	android:textSize="40px" 
+        	android:layout_height="wrap_content" 
+        	android:text="LOG IN" 
+        	android:textColor="#5E0505" 
+        	android:layout_marginTop="10px">
+        </TextView>
+        <ImageView android:layout_height="match_parent" 
+        	android:layout_width="match_parent" 
+        	android:src="@drawable/ipa2" 
+        	android:id="@+id/image2">
+        </ImageView> 
+    </LinearLayout>
+    
+
+
+	<LinearLayout
+      android:orientation="horizontal" 
+      android:id="@+id/linearLayout4" 
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+	<TextView  
+   		android:layout_width="wrap_content" 
+   	 	android:layout_height="wrap_content" 
+    	android:text=" User Name : "
+    	android:textSize="26px"
     />
+	<EditText
+		android:id="@+id/editText1"
+		android:hint="at least 4 character"
+		android:layout_width="300px"
+		android:layout_height="wrap_content">
+	</EditText>
+    </LinearLayout>
+    
+    
+	<LinearLayout
+      android:orientation="horizontal" 
+      android:id="@+id/linearLayout5" 
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+	<TextView  
+    	android:layout_width="wrap_content" 
+   	 	android:layout_height="wrap_content" 
+   	 	android:text=" Password :    "
+    	android:textSize="26px"
+    />
+	<EditText
+		android:id="@+id/editText2"
+		android:hint="at least 6 character"
+		android:layout_width="300px"
+		android:layout_height="wrap_content">
+	</EditText>
+    </LinearLayout>
+    
+    <LinearLayout
+      android:orientation="horizontal" 
+      android:id="@+id/linearLayout7" 
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+      <Button 
+      	android:id="@+id/button1"
+      	android:text="Log in"
+      	android:layout_width="wrap_content"
+      	android:layout_height="wrap_content"
+      	android:onClick="loginOnClick"/>
+      	
+      	<Button 
+      	android:id="@+id/button2"
+      	android:text="Register"
+      	android:layout_width="wrap_content"
+      	android:layout_height="wrap_content"
+      	android:onClick="registerOnClick"
+      	android:layout_marginLeft="10px"/>
+      	
+      <TextView 
+      	android:id="@+id/text1"
+      	android:layout_width="wrap_content"
+      	android:layout_height="wrap_content"
+      	android:textColor="#F50505"
+      	android:text=""
+      	android:paddingLeft="10px"
+      />
+      
+      
+
+ 	</LinearLayout>
+ 	
+ 	
 </LinearLayout>
