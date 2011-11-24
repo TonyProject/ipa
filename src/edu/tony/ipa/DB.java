@@ -105,6 +105,7 @@ private static final String API_KEY = "AIzaSyCm-5HSgkhLKgWjXV6OgbhpyqJaRxN--JA";
  *      shop_search		: ShopID		查詢某家店的資訊
  *      activity_search	: ShopID		 查詢某家店的活動
  *      shop_loc_search : Lat,Lng        給經緯度看這家店有沒有再db裡面
+ *		king_search 	:				 查詢所有的王
  * @return ArrayList<JSONObject>
  */
 
