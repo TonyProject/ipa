@@ -70,7 +70,7 @@ public class RadarChart {
     * Testing radar charts
     */
    @Test
-   public void example1() {
+   public String example1() {
        // EXAMPLE CODE START
        int count = 202;
        double[] x = new double[count];
@@ -102,6 +102,7 @@ public class RadarChart {
        Logger.global.info(url);
        String expectedString = "http://chart.apis.google.com/chart?chco=3D5593,000000&chd=s:fmtz479962xqjbUNHDBABEJPWdlsz479973yrkcVOIEBABEIOVckry379973ysldWPJEBABDINUbjqx269974ztmeXQKFBABDHMTaipw2689850unfYRKFCAACGMSZhpv1589851vogZRLGCAACGLRYgou0589861vphaSMGDAACFKQXfnu0489862wqibTNHDBABFJPWe,MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM&chf=bg,s,504227&chm=B,8FA3D6,0,0,0|o,FFC0CB,1,0,20,0|o,FFC0CB,1,20,20,0|o,FFC0CB,1,40,20,0|o,FFC0CB,1,60,20,0|o,FFC0CB,1,80,20,0|o,FFC0CB,1,100,20,0|o,FFC0CB,1,120,20,0|o,FFC0CB,1,140,20,0|o,FFC0CB,1,160,20,0|o,FFC0CB,1,180,20,0|o,FFC0CB,1,200,20,0|B,3D5593,1,0,0&chs=500x500&cht=rs&chts=FFFFFF,16&chtt=Radar+Chart";
        assertEquals("Junit error", normalize(expectedString), normalize(url));
+       return url;
    }
 
    @Test
@@ -140,9 +141,9 @@ public class RadarChart {
        plot.setColor(plotColor);
        plot.setLineStyle(LineStyle.newLineStyle(4, 1, 0));
        com.googlecode.charts4j.RadarChart chart = GCharts.newRadarChart(plot);
-       chart.setTitle("Simple Radar Chart", BLACK, 20);
+       //chart.setTitle("Simple Radar Chart", BLACK, 20);
        chart.setSize(400, 400);
-       RadialAxisLabels radialAxisLabels = AxisLabelsFactory.newRadialAxisLabels("Maths", "Arts", "French", "German", "Music");
+       RadialAxisLabels radialAxisLabels = AxisLabelsFactory.newRadialAxisLabels("潮流", "陽光", "娛樂", "行動", "肥胖", "行動");
        radialAxisLabels.setRadialAxisStyle(BLACK, 12);
        chart.addRadialAxisLabels(radialAxisLabels);
        AxisLabels contrentricAxisLabels = AxisLabelsFactory.newNumericAxisLabels(Arrays.asList(0, 20, 40, 60, 80, 100));

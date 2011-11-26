@@ -99,7 +99,7 @@ public class IPAActivity extends GDActivity {
     		        		result_a = db.DataSearch(nameValuePairs,"accountcheck");
     		    			
     		        		
-    		        		Log.e("log_act","size="+result_a.size());
+    		        		Log.i("log_act","size="+result_a.size());
     		    			for(int i=0;i<result_a.size();i++){
     		    				Log.e("r_act",result_a.get(i).getString("email"));
     		    			}

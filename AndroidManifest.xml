@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name="IPAChan"></activity>
-        <activity android:name="RadarTest"></activity>
+        <activity android:name="IPACloset"></activity>
+        <activity android:name="Home"></activity>
 
     </application>
     <uses-permission android:name="android.permission.INTERNET">
