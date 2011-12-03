@@ -106,6 +106,9 @@ private static final String API_KEY = "AIzaSyCm-5HSgkhLKgWjXV6OgbhpyqJaRxN--JA";
  *      activity_search	: ShopID		 查詢某家店的活動
  *      shop_loc_search : Lat,Lng        給經緯度看這家店有沒有再db裡面
  *		king_search 	:				 查詢所有的王
+ *		checkin			: IpaID,Lat,Lng,ShopID 打卡
+ *		register		: AccID,AccPass,FirstName,LastName,Email,Phone,BDay	註冊
+ *		speak_add		: AccID,Lat,Lng,Message 大聲公
  * @return ArrayList<JSONObject>
  */
 
@@ -140,6 +143,7 @@ public ArrayList<JSONObject> DataSearch (ArrayList<NameValuePair> nameValuePairs
 		if("false".equals(jOb.get("output")))
 			Log.e("log_tag","false");
 		else{
+			Log.e("Log_tag","true");
 			jArray = jOb.getJSONArray("result");
 			//Log.e("log_tag",jArray.toString());
 			for (int i = 0; i < jArray.length(); i++) {
