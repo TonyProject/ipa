@@ -62,8 +62,7 @@ public class IPAChan extends GDActivity {
         ipaChan.setImageBitmap(bitmap);
         
         closet.setOnClickListener(new Button.OnClickListener(){
-			@Override
-            public void onClick(View arg0) {
+			public void onClick(View arg0) {
         		Intent i = new Intent();
       			i.setClass(IPAChan.this, IPACloset.class);
       			startActivity(i);
@@ -71,8 +70,7 @@ public class IPAChan extends GDActivity {
         });
     	
         ipa_attr.setOnClickListener(new Button.OnClickListener(){
-			@Override
-            public void onClick(View arg0) {
+			public void onClick(View arg0) {
 				attrOnClick();
         		/*Intent i = new Intent();
       			i.setClass(IPAChan.this, RadarTest.class);

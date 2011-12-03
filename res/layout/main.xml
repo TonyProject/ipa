@@ -11,10 +11,8 @@
     	android:layout_width="fill_parent" 
     	android:orientation="vertical">
         
-        <ImageView android:layout_height="wrap_content" 
-        	android:layout_width="wrap_content" 
-        	android:src="@drawable/icon" 
-        	android:id="@+id/image2">
+        <ImageView android:src="@drawable/login" 
+        	android:id="@+id/image2" android:layout_width="match_parent" android:layout_height="340dp">
         </ImageView> 
     </LinearLayout>
 
@@ -31,8 +29,7 @@
 	<EditText
 		android:id="@+id/editText1"
 		android:hint="at least 4 character"
-		android:layout_width="300px"
-		android:layout_height="wrap_content">
+		android:layout_height="wrap_content" android:layout_width="match_parent">
 	</EditText>
     </LinearLayout>
     

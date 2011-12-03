@@ -71,12 +71,10 @@ public class IPACloset extends GDActivity implements ViewFactory{
     
     private OnItemSelectedListener myGalleryOnItemSelectedListener
      	= new OnItemSelectedListener(){
-    	@Override
     	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
     		// TODO Auto-generated method stub
     		myImageSwitcher.setImageResource(mThumbIds[arg2]);
     	}
-    	@Override
     	public void onNothingSelected(AdapterView<?> arg0) {
     		// TODO Auto-generated method stub
     	}
@@ -96,25 +94,21 @@ public class IPACloset extends GDActivity implements ViewFactory{
     		context = c;
     	}
      
-    	@Override
     	public int getCount() {
     		// TODO Auto-generated method stub
     		return mThumbIds.length;
     	}
 
-    	@Override
     	public Object getItem(int position) {
     		// TODO Auto-generated method stub
     		return mThumbIds[position];
     	}
 
-    	@Override
     	public long getItemId(int position) {
     		// TODO Auto-generated method stub
     		return position;
     	}
 
-    	@Override
     	public View getView(int position, View convertView, ViewGroup parent) {
     		// TODO Auto-generated method stub
     		ImageView imageView;
@@ -133,7 +127,6 @@ public class IPACloset extends GDActivity implements ViewFactory{
     	}
     }
 
-    @Override
     public View makeView() {
     	// TODO Auto-generated method stub
     	ImageView i = new ImageView(this);
