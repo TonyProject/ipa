@@ -44,8 +44,8 @@ private static final String API_KEY = "AIzaSyCm-5HSgkhLKgWjXV6OgbhpyqJaRxN--JA";
 
 /*******
  * 
- * @param ï¿½gï¿½nï¿½ï¿½
- * @return ï¿½ï¿½ï¿½ï¿½aï¿½ï¿½
+ * @param latitude , longitude
+ * @return nearby places
  */
  public ArrayList<JSONObject> LocSearch(double latitude,double longitude) throws Exception {
 	 //ArrayList<HashMap<String, String>> data=new ArrayList<HashMap<String, String>>(); 
@@ -102,17 +102,20 @@ private static final String API_KEY = "AIzaSyCm-5HSgkhLKgWjXV6OgbhpyqJaRxN--JA";
  * 		mycoupon_search	: AccID
  * 		myhonor_search	: IpaID
  * 		closet_search	: IpaID , type
- *      shop_search		: ShopID		ï¿½dï¿½ß¬Yï¿½aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½T
- *      activity_search	: ShopID		 ï¿½dï¿½ß¬Yï¿½aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
- *      shop_loc_search : Lat,Lng        ï¿½ï¿½ï¿½gï¿½nï¿½×¬Ý³oï¿½aï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Adbï¿½Ì­ï¿½
- *		king_search 	:				 ï¿½dï¿½ß©Ò¦ï¿½ï¿½ï¿½ï¿½ï¿½
- *      shop_search		: ShopID		¬d¸ß¬Y®a©±ªº¸ê°T
- *      activity_search	: ShopID		 ¬d¸ß¬Y®a©±ªº¬¡°Ê
- *      shop_loc_search : Lat,Lng        µ¹¸g½n«×¬Ý³o®a©±¦³¨S¦³¦Adb¸Ì­±
- *		king_search 	:				 ¬d¸ß©Ò¦³ªº¤ý
- *		checkin			: IpaID,Lat,Lng,ShopID ¥´¥d
- *		register		: AccID,AccPass,FirstName,LastName,Email,Phone,BDay	µù¥U
- *		speak_add		: AccID,Lat,Lng,Message ¤jÁn¤½
+ *      shop_search		: ShopID		// shop info
+ *      activity_search	: ShopID		
+ *      shop_loc_search : Lat,Lng      
+ *		king_search 	:				//List all the kings			
+ *      shop_search		: ShopID		
+ *      activity_search	: ShopID		 
+ *      shop_loc_search : Lat,Lng        
+ *		king_search 	:				
+ *		checkin			: IpaID,Lat,Lng,ShopID 
+ *		register		: AccID,AccPass,FirstName,LastName,Email,Phone,BDay	
+ *		speak_add		: AccID,Lat,Lng,Message 
+ *		friend_search	: Lat,Lng      //who checked in this location (in 1 day)
+ *		speak_search	: Lat,Lng		//who spoke in this location (in 1 day)
+ *		honor_search	: HonorID		//who get this honor
  * @return ArrayList<JSONObject>
  */
 
