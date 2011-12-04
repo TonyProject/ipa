@@ -8,7 +8,7 @@ public class IPAApplication extends GDApplication {
  
     @Override
     public Class<?> getHomeActivityClass() {
-        return IPAActivity.class;
+        return Home.class;
     }
  
     @Override

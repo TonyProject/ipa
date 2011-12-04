@@ -1,23 +1,29 @@
 package edu.tony.ipa;
 
+import greendroid.app.GDActivity;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import greendroid.app.GDActivity;
+import java.util.List;
+import java.util.Map;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.SimpleAdapter.ViewBinder;
 import android.widget.ViewSwitcher.ViewFactory;
 
 
@@ -26,9 +32,9 @@ public class IPACloset extends GDActivity implements ViewFactory{
 	private ImageSwitcher myImageSwitcher;
 	private ListView list;
 	private Gallery dressGallery;
-	private ArrayList< HashMap<String, Object> > listItem;
+	private ArrayList< HashMap<String, Object> > listItem = new ArrayList<HashMap<String, Object>>();
 	private String ipaChan_url= 
-    	"http://androidheadlines.com/wp-content/uploads/2011/07/contest-androidspin-wants-to-help-you-win-a-asus-transformer_tt-fr_0.png";
+    	"http://www.jamesinsummer.com/taiwanTide/images/android.png";
 
 	/** Called when the activity is first created. */
     @Override
@@ -36,27 +42,28 @@ public class IPACloset extends GDActivity implements ViewFactory{
         super.onCreate(savedInstanceState);
         setActionBarContentView(R.layout.ipa_closet);
         
-        list = (ListView) findViewById(R.id.dress_list);
-        /*listItemAdapter = 
+        //The list of items
+		HashMap<String, Object> item = new HashMap<String, Object>();
+        Bitmap bitmap = IPAChan.getBitmapFromUrl(ipaChan_url);
+        //dress_image.setImageBitmap(bitmap);
+		//dress_image.setImageResource(R.drawable.like);
+        
+        item.put("item", bitmap);
+		Log.i("Item_test", item.get("item").toString());
+		for (int i=0; i<20; i++)
+		listItem.add(item);
+        
+		list = (ListView) findViewById(R.id.item_list);
+        listItemAdapter = 
         	new SimpleAdapter(
         		this,
         		listItem,
         		R.layout.list_items,  
-        		new String[] {"dress"},   
-        		new int[] {R.id.image}  
+        		new String[] {"item"},   
+        		new int[] {R.id.item}  
         	);    
+        listItemAdapter.setViewBinder(new MyViewBinder());
         list.setAdapter(listItemAdapter);
-        
-		HashMap<String, Object> item = new HashMap<String, Object>();
-		for(int i=0; i<3; i++) {
-			ImageView dress_image = (ImageView) findViewById(R.id.image);
-	        //Bitmap bitmap = IPAChan.getBitmapFromUrl(ipaChan_url);
-	        //dress_image.setImageBitmap(bitmap);
-			dress_image.setImageResource(R.drawable.like);
-			item.put("dress", dress_image);
-			listItem.add(item);
-		}*/
-		
 		//listItemAdapter.notifyDataSetChanged();
         
         myImageSwitcher = (ImageSwitcher)findViewById(R.id.imageswitcher);
@@ -64,9 +71,23 @@ public class IPACloset extends GDActivity implements ViewFactory{
         myImageSwitcher.setInAnimation(AnimationUtils.loadAnimation(this, android.R.anim.fade_in));
         myImageSwitcher.setOutAnimation(AnimationUtils.loadAnimation(this, android.R.anim.fade_out));
         
-        dressGallery = (Gallery)findViewById(R.id.dress);
+        dressGallery = (Gallery)findViewById(R.id.dress_type);
         dressGallery.setAdapter(new ImageAdapter(this));
         dressGallery.setOnItemSelectedListener(myGalleryOnItemSelectedListener);
+        
+    }
+    public class MyViewBinder implements ViewBinder {
+        @Override
+        public boolean setViewValue(View view, Object data,
+                        String textRepresentation) {
+        		if( (view instanceof ImageView) & (data instanceof Bitmap) ) {
+                        ImageView iv = (ImageView) view;
+                        Bitmap bm = (Bitmap) data;     
+                        iv.setImageBitmap(bm); 
+                        return true;
+                }
+                return false;
+        }
     }
     
     private OnItemSelectedListener myGalleryOnItemSelectedListener
@@ -141,5 +162,7 @@ public class IPACloset extends GDActivity implements ViewFactory{
         i.setLayoutParams(new ImageSwitcher.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
         return i;
     }
+    
+    
 }
 
