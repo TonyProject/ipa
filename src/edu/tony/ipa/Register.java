@@ -1,13 +1,14 @@
 package edu.tony.ipa;
 
 import greendroid.app.GDActivity;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class Register extends GDActivity {
+public class Register extends Activity {
 
     private TextView warning = null;
     private EditText accountID = null;
@@ -21,7 +22,7 @@ public class Register extends GDActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
-	    setActionBarContentView(R.layout.register);
+	    setContentView(R.layout.register);
 	}
 	 
 	public void doneOnClick(View v){
@@ -60,11 +61,13 @@ public class Register extends GDActivity {
 		
 		if(verify == true){
 			//加資料進DB
+			
+			Intent i = new Intent();
+	     	i.setClass(Register.this, IPAActivity.class);
+	     	startActivity(i);
 		}
 		
 		
-		Intent i = new Intent();
-     	i.setClass(Register.this, IPAActivity.class);
-     	startActivity(i);
+		
 	}
 }
