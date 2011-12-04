@@ -1,11 +1,24 @@
 package edu.tony.ipa;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import greendroid.app.GDActivity;
 import greendroid.widget.ActionBarItem;
 import greendroid.widget.ActionBarItem.Type;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,10 +28,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Home extends GDActivity{
+
+	private LocationManager locationManager;
+	private String provider;
+	private ArrayList<JSONObject> result;
+	private DB db;
 	
-	private TextView checkinTextView;
-//	private final String[] items = {"7-11","MOS","M"};
-//    private final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,7 +44,6 @@ public class Home extends GDActivity{
         setActionBarContentView(R.layout.home);
         ImageButton ipaChan = (ImageButton) findViewById(R.id.imageButton1);
         ImageButton lookBtn = (ImageButton) findViewById(R.id.imageButton2);
-        checkinTextView=(TextView) findViewById(R.id.checkinText);
         
         
         
@@ -49,7 +63,7 @@ public class Home extends GDActivity{
         	public void onClick(View v)
         	{ 
         		Intent j = new Intent();
-      			j.setClass(Home.this, Checkin.class);
+      			j.setClass(Home.this, Register.class);
       			startActivity(j);
         	}
         }); 
@@ -64,13 +78,86 @@ public class Home extends GDActivity{
 		//actionbar's onclick
 		switch(item.getItemId()){
 		case 0:
-			//checkin here
+			//****checkin here
 			
-			final String[] items = {"7-11","MOS","M"};
+			//自己的經緯度
+			locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+			Criteria criteria = new Criteria();
+			provider = locationManager.getBestProvider(criteria, false);
+			Location location = locationManager.getLastKnownLocation(provider);
+			double b = location.getLongitude();
+			double a = location.getLatitude();
+			Log.e("longitude", String.valueOf(b));
+			Log.e("latitude", String.valueOf(a));
+			result = new ArrayList<JSONObject>();
+			db = new DB();
+			//end自己的經緯度
+			
+			//Google's shop
+			final String[] items = {};
+			final List<String> Gshops = new ArrayList<String>();
+			try{
+				result = db.LocSearch(a,b);
+				
+				for(int i = 0; i < result.size(); i++){
+					Gshops.add(i, result.get(i).getString("name"));
+				}
+			}
+			catch(Exception e){
+				Log.e("log_tag", "Error get data "+e.toString());				
+			}
+			//end Google's shop
+			
+			
+			//建立下拉式選單 by Google's shop
 			final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle("請選擇店家").setItems(items, new DialogInterface.OnClickListener() {
+			builder.setTitle("請選擇店家").setItems(Gshops.toArray(items), new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int which) {
-					checkinTextView.setText(items[which]);
+					
+ 				    //選擇店家後，要去DB裡找有沒有這個店家
+					String shopGet = Gshops.get(which);
+					Double lat,lng;
+					ArrayList<NameValuePair> location = new ArrayList<NameValuePair>();
+					ArrayList<JSONObject> shop_loc = new ArrayList<JSONObject>();
+					Log.e("check", shopGet);
+					for(int i = 0; i < result.size(); i++){
+						try {
+							if(result.get(i).getString("name").equals(shopGet)){
+								lat = result.get(i).getJSONObject("geometry").getJSONObject("location").getDouble("lat");
+								lng = result.get(i).getJSONObject("geometry").getJSONObject("location").getDouble("lng");
+								
+								location.add(new BasicNameValuePair("Lng",lng.toString()));
+								location.add(new BasicNameValuePair("Lat",lat.toString()));
+								shop_loc = db.DataSearch(location,"shop_loc_search");
+								
+								for(int j=0;j<shop_loc.size();j++){
+									Log.e("shop_id",shop_loc.get(j).getString("shopID"));
+								}
+							}
+						}catch(Exception e){
+							Log.e("log_tag", "Error get data "+e.toString());				
+						}	
+					}
+					
+					//----新增至checkin table----
+
+					//用accountID找ipaID
+					SharedPreferences settings = getSharedPreferences("Account", 0);
+			        String user = settings.getString("username", "nouser");
+			        Log.e("user", user);
+			        try{
+			        	ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+			        	nameValuePairs.add(new BasicNameValuePair("AccID",user));
+
+			        	ArrayList<JSONObject> result_a = db.DataSearch(nameValuePairs,"ipa_search");
+						Log.e("log_act","size="+result_a.size());
+						for(int i=0;i<result_a.size();i++){
+							Log.e("r_act",result_a.get(i).getString("ipaID"));
+						}
+					}
+			        catch(Exception e){
+			        	Log.e("log_tag", "Error get data "+e.toString());				
+			        }	
 					
 				}
 			});
