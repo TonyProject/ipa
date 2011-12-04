@@ -116,6 +116,7 @@ private static final String API_KEY = "AIzaSyCm-5HSgkhLKgWjXV6OgbhpyqJaRxN--JA";
  *		friend_search	: Lat,Lng      //who checked in this location (in 1 day)
  *		speak_search	: Lat,Lng		//who spoke in this location (in 1 day)
  *		honor_search	: HonorID		//who get this honor
+ *		like			: IpaID			//like this person
  * @return ArrayList<JSONObject>
  */
 
