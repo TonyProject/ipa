@@ -29,11 +29,13 @@ import android.widget.Toast;
 
 public class Home extends GDActivity{
 
+
 	private LocationManager locationManager;
 	private String provider;
 	private ArrayList<JSONObject> result;
 	private DB db;
 	
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,8 @@ public class Home extends GDActivity{
         
         addActionBarItem(Type.LocateMyself, ACTION_BAR_INFO);
         setActionBarContentView(R.layout.home);
+
+        
         ImageButton ipaChan = (ImageButton) findViewById(R.id.imageButton1);
         ImageButton lookBtn = (ImageButton) findViewById(R.id.imageButton2);
         
@@ -69,8 +73,7 @@ public class Home extends GDActivity{
         }); 
    
     }
-    
- 
+     
     
 
 	@Override
@@ -169,6 +172,7 @@ public class Home extends GDActivity{
 		}
 		return true;
 	}
+}
     
 
-}
+
