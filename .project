@@ -36,5 +36,15 @@
 			<type>2</type>
 			<locationURI>_android_GreenDroid_612cb559/src</locationURI>
 		</link>
+		<link>
+			<name>greendroid_map_src</name>
+			<type>2</type>
+			<locationURI>_android_greendroid_map_ab244976/src</locationURI>
+		</link>
+		<link>
+			<name>greendroid_src</name>
+			<type>2</type>
+			<locationURI>_android_greendroid_ec1dc959/src</locationURI>
+		</link>
 	</linkedResources>
 </projectDescription>

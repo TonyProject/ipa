@@ -67,7 +67,7 @@ public class Home extends GDActivity{
         	public void onClick(View v)
         	{ 
         		Intent j = new Intent();
-      			j.setClass(Home.this, Register.class);
+      			j.setClass(Home.this, LookAround.class);
       			startActivity(j);
         	}
         }); 
