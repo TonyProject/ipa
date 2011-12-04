@@ -35,6 +35,11 @@
         <activity android:name="Register"></activity>
         <activity android:name="Checkin"></activity>
         <activity android:name="LookAround"></activity>
+        <activity android:name="Shop"></activity>
+        <activity android:name="Honor"></activity>
+        <activity android:name="ShopDetail"></activity>
+        <activity android:name="Talk"></activity>
+        <activity android:name="TabTestActivity"></activity>
 
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>

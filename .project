@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>IPA</name>
+	<name>IPAActivity</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -37,6 +37,11 @@
 			<locationURI>_android_GreenDroid_612cb559/src</locationURI>
 		</link>
 		<link>
+			<name>green_src</name>
+			<type>2</type>
+			<locationURI>_android_green_5e0cf03/src</locationURI>
+		</link>
+		<link>
 			<name>greendroid_map_src</name>
 			<type>2</type>
 			<locationURI>_android_greendroid_map_ab244976/src</locationURI>
@@ -45,6 +50,11 @@
 			<name>greendroid_src</name>
 			<type>2</type>
 			<locationURI>_android_greendroid_ec1dc959/src</locationURI>
+		</link>
+		<link>
+			<name>greenmap_src</name>
+			<type>2</type>
+			<locationURI>_android_greenmap_c3bd379/src</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

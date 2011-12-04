@@ -48,6 +48,7 @@ public class Home extends GDActivity{
         
         ImageButton ipaChan = (ImageButton) findViewById(R.id.imageButton1);
         ImageButton lookBtn = (ImageButton) findViewById(R.id.imageButton2);
+        ImageButton hotnewsBtn = (ImageButton) findViewById(R.id.imageButton3);
         
         
         
@@ -71,6 +72,16 @@ public class Home extends GDActivity{
       			startActivity(j);
         	}
         }); 
+        
+        hotnewsBtn.setOnClickListener(new Button.OnClickListener()
+        {
+        	public void onClick(View v)
+        	{ 
+        		Intent j = new Intent();
+      			j.setClass(Home.this, TabTestActivity.class);
+      			startActivity(j);
+        	}
+        });
    
     }
      
