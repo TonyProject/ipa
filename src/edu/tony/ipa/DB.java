@@ -106,6 +106,13 @@ private static final String API_KEY = "AIzaSyCm-5HSgkhLKgWjXV6OgbhpyqJaRxN--JA";
  *      activity_search	: ShopID		 ï¿½dï¿½ß¬Yï¿½aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  *      shop_loc_search : Lat,Lng        ï¿½ï¿½ï¿½gï¿½nï¿½×¬Ý³oï¿½aï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Adbï¿½Ì­ï¿½
  *		king_search 	:				 ï¿½dï¿½ß©Ò¦ï¿½ï¿½ï¿½ï¿½ï¿½
+ *      shop_search		: ShopID		¬d¸ß¬Y®a©±ªº¸ê°T
+ *      activity_search	: ShopID		 ¬d¸ß¬Y®a©±ªº¬¡°Ê
+ *      shop_loc_search : Lat,Lng        µ¹¸g½n«×¬Ý³o®a©±¦³¨S¦³¦Adb¸Ì­±
+ *		king_search 	:				 ¬d¸ß©Ò¦³ªº¤ý
+ *		checkin			: IpaID,Lat,Lng,ShopID ¥´¥d
+ *		register		: AccID,AccPass,FirstName,LastName,Email,Phone,BDay	µù¥U
+ *		speak_add		: AccID,Lat,Lng,Message ¤jÁn¤½
  * @return ArrayList<JSONObject>
  */
 
@@ -140,6 +147,7 @@ public ArrayList<JSONObject> DataSearch (ArrayList<NameValuePair> nameValuePairs
 		if("false".equals(jOb.get("output")))
 			Log.e("log_tag","false");
 		else{
+			Log.e("Log_tag","true");
 			jArray = jOb.getJSONArray("result");
 			//Log.e("log_tag",jArray.toString());
 			for (int i = 0; i < jArray.length(); i++) {
