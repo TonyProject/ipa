@@ -33,13 +33,11 @@ class Landmark extends ItemizedOverlay <OverlayItem> {
 			//GeoPoint point[] = new GeoPoint[stores_in_db.size()];
 			Log.e("stores_in_db","size"+stores_in_db.size());
 			for(int i=0;i<stores_in_db.size();i++){
-				Log.e("stores_in_db","now"+i);
+				//Log.e("stores_in_db","now"+i);
 				
 				
 				nameValuePairs.add(new BasicNameValuePair("ShopID",stores_in_db.get(i)));
-				Log.e("stores_in_db","noww"+i);
 				ArrayList<JSONObject> result_a = db.DataSearch(nameValuePairs,"shop_search");
-				Log.e("stores_in_db",result_a.get(0).toString());
 				
 				GeoPoint point = new GeoPoint(
 					(int)(result_a.get(0).getDouble("latitude") * 1000000),
@@ -49,7 +47,7 @@ class Landmark extends ItemizedOverlay <OverlayItem> {
 				//Log.e("r_act",result_a.get(i).getString("shopName"));
 				
 				items.add(new OverlayItem(point, result_a.get(0).getString("shopName"), result_a.get(0).getString("description")));
-				
+			
 			}
 		}
 		catch(Exception e){
@@ -84,9 +82,11 @@ class Landmark extends ItemizedOverlay <OverlayItem> {
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);	//顯示於主程式main
 		builder.setTitle(items.get(index).getTitle());	//加入標題
 		builder.setMessage(items.get(index).getSnippet());	//加入說明
-		/*
-			builder.setView(arg0)   要連謝采璇的!
-		 */
+		
+		
+		
+		//builder.setView(arg0);   //要連謝采璇的!
+		 
 		builder.setPositiveButton("OK",
 			new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int which) {}

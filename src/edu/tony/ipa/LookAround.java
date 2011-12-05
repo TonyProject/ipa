@@ -4,11 +4,22 @@ import android.app.Activity;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ZoomControls;
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 
@@ -24,8 +35,13 @@ import com.google.android.maps.Overlay;
 
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.OverlayItem;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.content.Context;
+import android.content.Intent;
+
 import java.util.ArrayList;
 
 import org.apache.http.NameValuePair;
@@ -42,9 +58,11 @@ public class LookAround extends GDMapActivity {
 	private String provider;
 	
     LinearLayout linearLayout;
+    LinearLayout imageLayout;
 	MapView mapView;
 	MapController mapController;
 	ZoomControls mZoom;
+	ArrayList<people_near> people_near_list = new ArrayList<people_near>();		//find near
 	@SuppressWarnings("deprecation")	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +70,7 @@ public class LookAround extends GDMapActivity {
         setActionBarContentView(R.layout.look_around);
         
         linearLayout = (LinearLayout) findViewById(R.id.zoomview);
+        imageLayout= (LinearLayout) findViewById(R.id.linearLayout1);
         mapView = (MapView) findViewById(R.id.mapview);
         mZoom = (ZoomControls) mapView.getZoomControls();
         linearLayout.addView(mZoom);
@@ -64,8 +83,31 @@ public class LookAround extends GDMapActivity {
 		// default
 	
 		setupMap();
-              
+        
+		ImageButton tempBtn = new ImageButton(this);
+		Bitmap bitmap = getBitmapFromUrl("http://140.112.107.29/images/dress/c_up1.png");
+		tempBtn.setImageBitmap(bitmap) ;
+		tempBtn.setAdjustViewBounds(true);
+		imageLayout.addView(tempBtn);
     }
+	
+    public static Bitmap getBitmapFromUrl(String imgUrl) {
+        URL url;
+        Bitmap bitmap = null;
+        try {
+                url = new URL(imgUrl);
+                InputStream is = url.openConnection().getInputStream();
+                BufferedInputStream bis = new BufferedInputStream(is);
+                bitmap = BitmapFactory.decodeStream(bis);
+                bis.close();
+        } catch (MalformedURLException e) {
+                e.printStackTrace();
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
+        return bitmap;
+}
+
 	
 	MyLocationOverlay mylayer;
 	
@@ -96,10 +138,12 @@ public class LookAround extends GDMapActivity {
 		//找附近店家資訊(all) + transform
 		ArrayList<Position_transform> pos_array = new ArrayList<Position_transform>();
 		ArrayList<String> stores_in_db = new ArrayList<String>();
+		
+		
 		DB db = new DB();
 		try{
-			//Double a =own_lat, b=own_lng;
-			Double a =25.019943, b=121.542353;
+			Double a =own_lat, b=own_lng;
+			//Double a =25.019943, b=121.542353;
 			ArrayList<JSONObject> result = db.LocSearch(a,b);
 			
 			for(int i=0;i<result.size();i++){
@@ -121,15 +165,31 @@ public class LookAround extends GDMapActivity {
 						
 			ArrayList<NameValuePair> location_1 = new ArrayList<NameValuePair>();
 			ArrayList<JSONObject> shop_loc = new ArrayList<JSONObject>();
+			ArrayList<JSONObject> friend = new ArrayList<JSONObject>();
+			
 			for(int i=0; i<pos_array.size();i++){
 				location_1.add(new BasicNameValuePair("Lng",pos_array.get(i).location_lon.toString()));
 				location_1.add(new BasicNameValuePair("Lat",pos_array.get(i).location_lat.toString()));
+				
 				shop_loc = db.DataSearch(location_1,"shop_loc_search");
+				
+				friend = db.DataSearch(location_1,"friend_search");
+				
 				for(int j=0;j<shop_loc.size();j++){
 					//Log.e("shop_id",shop_loc.get(j).getString("shopID"));
 					stores_in_db.add(shop_loc.get(j).getString("shopID"));
 				}
+				//找附近IPA的圖(People_near是global variable)
+				for(int j=0;j<friend.size();j++){
+					//Log.e("ipa_id",friend.get(j).getString("accountID"));
+					//people_near_id.add(friend.get(j).getInt("ipaID") );
+					//people_near_img.add(friend.get(j).getString("img"));
+					people_near neighbor = new people_near(friend.get(j).getInt("ipaID"),friend.get(j).getString("img"));
+					people_near_list.add(neighbor);
+				}
 			}
+			
+			
 			//check for Stores_in_db是否寫入
 			/*
 			for(int i=0; i<stores_in_db.size(); i++){
@@ -171,7 +231,35 @@ public class LookAround extends GDMapActivity {
 		return false;
 	}
 		
-	
+	/*public void addBtn(List<people_near> people_near){
+		
+    	if(people_near.size() > 0){
+    		for(int i = 0; i < people_near.size(); i++){
+    			ImageButton tempBtn = new ImageButton(this);
+    			tempBtn.setImageResource(R.drawable.ipa2);
+    			tempBtn.setId(Integer.valueOf(shopIDList.get(i)));
+    			
+    			//還要寫按Button的動作
+    			tempBtn.setOnClickListener(new View.OnClickListener() {
+    	             public void onClick(View v) {
+    	            	 int id = v.getId();
+    	            	// setActivityDetail(id);
+    	            	 Intent detailintent = new Intent();
+    	            	 detailintent.setClass(Shop.this, ShopDetail.class);
+    	            	 Bundle bundle = new Bundle();
+    	            	 bundle.putString("ID", String.valueOf(id));
+    	            	 
+    	            	 detailintent.putExtras(bundle);
+    	            	 startActivity(detailintent);
+    	            	 
+    	             }
+    	         });
+
+    			linearLayout.addView(tempBtn, 300, 100);
+    		}
+    	}
+    	
+    }*/
 
 	
 }
