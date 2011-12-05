@@ -152,11 +152,13 @@ public ArrayList<JSONObject> DataSearch (ArrayList<NameValuePair> nameValuePairs
 			Log.e("log_tag","false");
 		else{
 			Log.e("Log_tag","true");
+			if(jOb.has("result")){
 			jArray = jOb.getJSONArray("result");
 			//Log.e("log_tag",jArray.toString());
 			for (int i = 0; i < jArray.length(); i++) {
 				JSONObject j = jArray.optJSONObject(i);
 				data.add(j);
+			}
 			}
 		}
 	}catch(JSONException e){
