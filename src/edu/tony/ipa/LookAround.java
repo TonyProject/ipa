@@ -20,6 +20,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -62,7 +65,13 @@ public class LookAround extends GDMapActivity {
 	MapView mapView;
 	MapController mapController;
 	ZoomControls mZoom;
-	ArrayList<people_near> people_near_list = new ArrayList<people_near>();		//find near
+	int ipa_id;
+	String ipa_img;
+	int like_amount;
+	//find near
+	ArrayList<people_near> people_near_list = new ArrayList<people_near>();
+	HashMap<Integer, people_near> people_near_list_compare = new HashMap<Integer, people_near>();
+	
 	@SuppressWarnings("deprecation")	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,13 +93,11 @@ public class LookAround extends GDMapActivity {
 	
 		setupMap();
         
-		ImageButton tempBtn = new ImageButton(this);
-		Bitmap bitmap = getBitmapFromUrl("http://140.112.107.29/images/dress/c_up1.png");
-		tempBtn.setImageBitmap(bitmap) ;
-		tempBtn.setAdjustViewBounds(true);
-		imageLayout.addView(tempBtn);
+		addBtn(people_near_list);
     }
 	
+	
+	//for image button!!
     public static Bitmap getBitmapFromUrl(String imgUrl) {
         URL url;
         Bitmap bitmap = null;
@@ -106,7 +113,7 @@ public class LookAround extends GDMapActivity {
                 e.printStackTrace();
         }
         return bitmap;
-}
+    }
 
 	
 	MyLocationOverlay mylayer;
@@ -117,7 +124,7 @@ public class LookAround extends GDMapActivity {
 		mylayer = new MyLocationOverlay(this, mapView);	//建立定位層，並取得目前座標位置
 		mylayer.runOnFirstFix(new Runnable() {		//每次更新時要執行的動作
 			public void run() {
-				mapView.setSatellite(true) ;//設定地圖檢示模式
+				mapView.setSatellite(false) ;//設定地圖檢示模式
 				//.setTraffic(true)：一般地圖
 				//.setSatellite(true)：衛星地圖
 				//.setStreetView：街景圖
@@ -184,8 +191,13 @@ public class LookAround extends GDMapActivity {
 					//Log.e("ipa_id",friend.get(j).getString("accountID"));
 					//people_near_id.add(friend.get(j).getInt("ipaID") );
 					//people_near_img.add(friend.get(j).getString("img"));
-					people_near neighbor = new people_near(friend.get(j).getInt("ipaID"),friend.get(j).getString("img"));
-					people_near_list.add(neighbor);
+					people_near neighbor = new people_near(friend.get(j).getInt("ipaID"),friend.get(j).getString("img"), friend.get(j).getInt("likenum"));
+					if(!people_near_list_compare.containsKey(friend.get(j).getInt("ipaID"))){
+						people_near_list_compare.put(friend.get(j).getInt("ipaID"), neighbor);
+						people_near_list.add(neighbor);
+					}
+					
+					
 				}
 			}
 			
@@ -231,35 +243,42 @@ public class LookAround extends GDMapActivity {
 		return false;
 	}
 		
-	/*public void addBtn(List<people_near> people_near){
-		
-    	if(people_near.size() > 0){
-    		for(int i = 0; i < people_near.size(); i++){
-    			ImageButton tempBtn = new ImageButton(this);
-    			tempBtn.setImageResource(R.drawable.ipa2);
-    			tempBtn.setId(Integer.valueOf(shopIDList.get(i)));
+	public void addBtn(final ArrayList<people_near> people_near_list){
+    	if(people_near_list.size() > 0){
+    		
+    		for(int i = 0; i < people_near_list.size(); i++){
     			
-    			//還要寫按Button的動作
-    			tempBtn.setOnClickListener(new View.OnClickListener() {
-    	             public void onClick(View v) {
-    	            	 int id = v.getId();
-    	            	// setActivityDetail(id);
-    	            	 Intent detailintent = new Intent();
-    	            	 detailintent.setClass(Shop.this, ShopDetail.class);
-    	            	 Bundle bundle = new Bundle();
-    	            	 bundle.putString("ID", String.valueOf(id));
-    	            	 
-    	            	 detailintent.putExtras(bundle);
-    	            	 startActivity(detailintent);
-    	            	 
-    	             }
-    	         });
+    			ImageButton tempBtn = new ImageButton(this);
+    			
+    			if(!people_near_list.get(i).img.equals("")){
+    				Bitmap bitmap = getBitmapFromUrl(people_near_list.get(i).img);
+    				tempBtn.setImageBitmap(bitmap);
+    				tempBtn.setAdjustViewBounds(true);
+    				tempBtn.setId(Integer.valueOf(people_near_list.get(i).ipaID));
+    				    				
+    				tempBtn.setId(i);
+    				tempBtn.setOnClickListener(new View.OnClickListener() {
+    					public void onClick(View v) {
+    						int id = v.getId();
+       	            	 	// setActivityDetail(id);
+       	            	 	Intent intent = new Intent();
+       	            	 	intent.setClass(LookAround.this, people_info_image.class);
+       	            	 	intent.putExtra("img", people_near_list.get(id).img);
+       	            	 	intent.putExtra("likenum", people_near_list.get(id).likenum);
+       	            	 	
+       	            	 	startActivity(intent);
+       	            	 
+       	             }
+    				});
+    				
+    				
+    			}
 
-    			linearLayout.addView(tempBtn, 300, 100);
+    			imageLayout.addView(tempBtn);
     		}
     	}
     	
-    }*/
+    }
 
 	
 }

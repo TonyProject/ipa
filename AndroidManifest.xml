@@ -40,6 +40,7 @@
         <activity android:name="ShopDetail"></activity>
         <activity android:name="Talk"></activity>
         <activity android:name="TabTestActivity"></activity>
+        <activity android:name="people_info_image"></activity>
 
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
